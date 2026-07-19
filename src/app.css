@@ -2,27 +2,33 @@
 /* Drenched surfaces: the theme's floor material fills the viewport.        */
 
 [data-variant='roman'] {
-  /* Warm limestone paving, lines carved a shade deeper. */
+  /* Warm limestone paving; grooves cut deep, sunlit edge below each cut. */
   --floor: oklch(0.92 0.025 85);
-  --line: oklch(0.72 0.045 78);
-  --line-soft: oklch(0.82 0.035 82);
-  --dimple: oklch(0.8 0.04 80);
+  --line: oklch(0.63 0.055 74);
+  --line-hi: oklch(0.975 0.012 90);
+  --line-soft: oklch(0.8 0.04 80);
+  --dimple: oklch(0.76 0.045 78);
   --ink: oklch(0.32 0.03 70);
   --ink-dim: oklch(0.52 0.035 75);
   --glow: oklch(0.58 0.12 70);
   --chrome-bg: oklch(0.88 0.03 84);
+  /* flagstone joints: the board is carved into one slab of a paved floor */
+  --floor-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cg fill='none' stroke='%238a7458' stroke-opacity='0.13' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M0 78 C 60 73, 150 83, 240 78'/%3E%3Cpath d='M0 190 C 80 195, 170 185, 240 190'/%3E%3Cpath d='M150 0 C 147 28, 153 55, 150 78'/%3E%3Cpath d='M60 78 C 63 115, 57 155, 60 190'/%3E%3Cpath d='M150 190 C 153 210, 147 226, 150 240'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 [data-variant='tamil'] {
   /* Deep red-oxide floor, lines chalked in warm off-white. */
-  --floor: oklch(0.41 0.075 35);
+  --floor: oklch(0.4 0.088 34);
   --line: oklch(0.93 0.02 90);
+  --line-hi: oklch(0.97 0.012 90);
   --line-soft: oklch(0.62 0.06 38);
   --dimple: oklch(0.51 0.07 37);
   --ink: oklch(0.95 0.015 90);
-  --ink-dim: oklch(0.75 0.035 60);
+  --ink-dim: oklch(0.76 0.035 60);
   --glow: oklch(0.87 0.11 85);
-  --chrome-bg: oklch(0.46 0.07 36);
+  --chrome-bg: oklch(0.45 0.082 35);
+  /* pulli grid: an oxide floor dotted, waiting for its kolam */
+  --floor-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112'%3E%3Cg fill='%23f4ead9' fill-opacity='0.2'%3E%3Ccircle cx='27' cy='29' r='1.7'/%3E%3Ccircle cx='85' cy='26' r='1.6'/%3E%3Ccircle cx='29' cy='84' r='1.6'/%3E%3Ccircle cx='83' cy='86' r='1.7'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 :root {

@@ -5,6 +5,14 @@
 
   let open = $state<'none' | 'board' | 'restart'>('none');
   let pending = $state<Variant | null>(null);
+  let chromeEl: HTMLDivElement;
+
+  function onOutside(e: PointerEvent) {
+    if (open !== 'none' && !chromeEl.contains(e.target as Node)) {
+      open = 'none';
+      pending = null;
+    }
+  }
 
   function clickRestart() {
     if (!game.inProgress) {
@@ -40,7 +48,9 @@
   }
 </script>
 
-<div class="chrome">
+<svelte:window onpointerdown={onOutside} />
+
+<div class="chrome" bind:this={chromeEl}>
   {#if open === 'restart'}
     <div class="pop" transition:fade={{ duration: 120 }}>
       <span>Start over?</span>
@@ -107,9 +117,10 @@
 <style>
   .chrome {
     position: fixed;
-    right: 10px;
-    bottom: 6px;
+    right: 8px;
+    bottom: 8px;
     display: flex;
+    flex-direction: column;
     gap: 2px;
   }
 
@@ -135,7 +146,7 @@
 
   .pop {
     position: absolute;
-    bottom: 50px;
+    bottom: 96px;
     right: 0;
     background: var(--chrome-bg);
     border: 1px solid var(--line-soft);

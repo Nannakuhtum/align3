@@ -36,9 +36,19 @@
   aria-label="align3 board"
 >
   <defs>
-    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.045 0.07" numOctaves="2" seed="7" result="n" />
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" />
+    <!-- chisel wobble: slight, controlled -->
+    <filter id="carve" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.06 0.09" numOctaves="2" seed="7" result="n" />
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.1" />
+    </filter>
+    <!-- chalk wobble: looser hand, two seeds so the re-chalk pass doesn't trace the first -->
+    <filter id="chalk" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05 0.08" numOctaves="2" seed="7" result="n" />
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" />
+    </filter>
+    <filter id="chalk2" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05 0.08" numOctaves="2" seed="13" result="n" />
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" />
     </filter>
   </defs>
 
@@ -48,10 +58,25 @@
     </g>
   {/key}
 
+  <!-- markers share the board's line quality; hit targets stay unfiltered -->
+  <g filter={game.variant === 'roman' ? 'url(#carve)' : 'url(#chalk)'}>
+    {#each POINTS as i (i)}
+      {@const p = pointPos(i, game.variant)}
+      <g class="point" style="transform: translate({p.x}px, {p.y}px)">
+        {#if game.variant === 'roman'}
+          <circle r="3" class="socket" />
+          <circle r="1.9" class="dimple" class:glow={targets.has(i)} />
+        {:else}
+          <circle r="2.5" class="chalk-ring" class:lit={targets.has(i)} />
+          <circle r="0.85" class="chalk-dot" class:glow={targets.has(i)} />
+        {/if}
+      </g>
+    {/each}
+  </g>
+
   {#each POINTS as i (i)}
     {@const p = pointPos(i, game.variant)}
     <g class="point" style="transform: translate({p.x}px, {p.y}px)">
-      <circle r="1.6" class="dimple" class:glow={targets.has(i)} />
       {#if targets.has(i)}
         <circle r="3.4" class="halo" />
       {/if}
@@ -87,11 +112,39 @@
     transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  .socket {
+    fill: none;
+    stroke: var(--line-soft);
+    stroke-width: 0.55;
+    opacity: 0.9;
+  }
+
   .dimple {
     fill: var(--dimple);
     transition: fill 0.2s;
   }
   .dimple.glow {
+    fill: var(--glow);
+  }
+
+  .chalk-ring {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 0.65;
+    opacity: 0.8;
+    transition: stroke 0.2s;
+  }
+  .chalk-ring.lit {
+    stroke: var(--glow);
+    opacity: 1;
+  }
+
+  .chalk-dot {
+    fill: var(--line);
+    opacity: 0.85;
+    transition: fill 0.2s;
+  }
+  .chalk-dot.glow {
     fill: var(--glow);
   }
 
