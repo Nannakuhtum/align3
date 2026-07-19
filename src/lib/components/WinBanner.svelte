@@ -10,8 +10,8 @@
 
 <div class="veil" class:flip={winner === 1} transition:fade={{ duration: dur, delay }}>
   <div class="panel">
-    <h1>Three in a row!</h1>
-    <p>
+    <p class="win-title">Three in a row!</p>
+    <p class="round">
       <svg viewBox="-6 -6 12 12" class="glyph" aria-hidden="true">
         {#if winner === 0}
           <circle r="5" fill="var(--p1-stone)" />
@@ -60,7 +60,7 @@
     }
   }
 
-  h1 {
+  .win-title {
     font-family: var(--serif);
     font-weight: 600;
     font-size: 1.7rem;
@@ -68,7 +68,7 @@
     margin: 0 0 10px;
   }
 
-  p {
+  .round {
     display: flex;
     align-items: center;
     justify-content: center;
