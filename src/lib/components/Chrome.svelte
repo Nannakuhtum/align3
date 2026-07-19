@@ -91,6 +91,18 @@
     </div>
   {/if}
 
+  <a class="icon" aria-label="Aakkagam Games home" href="https://games.aakkagam.com/">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M4.5 11 12 4.5 19.5 11M6.5 9.5V19h11V9.5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </a>
   <button class="icon" aria-label="restart game" onclick={clickRestart}>
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path
